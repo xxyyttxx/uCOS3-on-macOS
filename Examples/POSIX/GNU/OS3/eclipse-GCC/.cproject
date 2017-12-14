@@ -28,13 +28,13 @@
 								<option defaultValue="gnu.c.optimization.level.none" id="gnu.c.compiler.exe.debug.option.optimization.level.508691698" name="Optimization Level" superClass="gnu.c.compiler.exe.debug.option.optimization.level" useByScannerDiscovery="false" valueType="enumerated"/>
 								<option id="gnu.c.compiler.exe.debug.option.debugging.level.195267257" name="Debug Level" superClass="gnu.c.compiler.exe.debug.option.debugging.level" useByScannerDiscovery="false" value="gnu.c.debugging.level.max" valueType="enumerated"/>
 								<option id="gnu.c.compiler.option.include.paths.394868922" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}}/..&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}}/../../../../../Software/uC-CPU&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}}/../../../../../Software/uC-CPU/Posix/GNU&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}}/../../../../../Software/uC-LIB&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}}/../../../../../Software/uCOS-III&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}}/../../../../../Software/uCOS-III/Source&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}}/../../../../../Software/uCOS-III/Ports/POSIX/GNU&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;../..&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;../../../../../../Software/uC-CPU&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;../../../../../../Software/uC-CPU/Posix/GNU&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;../../../../../../Software/uC-LIB&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;../../../../../../Software/uCOS-III&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;../../../../../../Software/uCOS-III/Source&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;../../../../../../Software/uCOS-III/Ports/POSIX/GNU&quot;"/>
 								</option>
 								<option id="gnu.c.compiler.option.dialect.std.1211392375" name="Language standard" superClass="gnu.c.compiler.option.dialect.std" useByScannerDiscovery="true" value="gnu.c.compiler.dialect.c99" valueType="enumerated"/>
 								<option id="gnu.c.compiler.option.preprocessor.def.symbols.1276550432" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
@@ -44,7 +44,7 @@
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1548028321" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
 							<tool command="gcc" commandLinePattern="${COMMAND} ${FLAGS} ${OUTPUT_FLAG} ${OUTPUT_PREFIX}${OUTPUT} ${INPUTS}" errorParsers="org.eclipse.cdt.core.GLDErrorParser" id="cdt.managedbuild.tool.gnu.c.linker.exe.debug.1355944447" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.exe.debug">
-								<option id="gnu.c.link.option.libs.1875726556" name="Libraries (-l)" superClass="gnu.c.link.option.libs" valueType="libs">
+								<option id="gnu.c.link.option.libs.1875726556" name="Libraries (-l)" superClass="gnu.c.link.option.libs" useByScannerDiscovery="false" valueType="libs">
 									<listOptionValue builtIn="false" value="pthread"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.linker.input.280806727" superClass="cdt.managedbuild.tool.gnu.c.linker.input">
