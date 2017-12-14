@@ -106,7 +106,7 @@ int  main (void)
 
     OSStart(&err);                                              /* Start multitasking (i.e. give control to uC/OS-III). */
 
-    while(DEF_ON){												/* Should Never Get Here							    */
+    while(DEF_ON){                                              /* Should Never Get Here                                */
     };
 }
 
@@ -141,7 +141,7 @@ static  void  App_TaskStart (void *p_arg)
     OS_CPU_SysTickInit();
 
     while (DEF_TRUE) {                                          /* Task body, always written as an infinite loop.       */
-    	printf("uCOS-III is running.\n");
+        printf("uCOS-III is running.\n");
         OSTimeDlyHMSM(0u, 0u, 1u, 0u,
                       OS_OPT_TIME_HMSM_STRICT,
                       &os_err);

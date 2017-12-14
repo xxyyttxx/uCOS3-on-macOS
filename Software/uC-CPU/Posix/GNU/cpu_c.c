@@ -629,7 +629,7 @@ void  CPU_TS_TmrInit (void)
     res.tv_sec  = 0;
     res.tv_nsec = 0;
 
-	(void)clock_settime(CLOCK_MONOTONIC, &res);
+    (void)clock_settime(CLOCK_MONOTONIC, &res);
 
     CPU_TS_TmrFreqSet(1000000000);
 }

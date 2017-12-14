@@ -82,7 +82,7 @@
 *********************************************************************************************************
 *                        CPU INTERRUPTS DISABLED TIME MEASUREMENT CONFIGURATION
 *
-* Note(s) : (1) (a) Configure CPU_CFG_INT_DIS_MEAS_EN to enable/disable measuring CPU's interrupts 
+* Note(s) : (1) (a) Configure CPU_CFG_INT_DIS_MEAS_EN to enable/disable measuring CPU's interrupts
 *                   disabled time :
 *
 *                   (a)  Enabled,       if CPU_CFG_INT_DIS_MEAS_EN      #define'd in 'cpu_cfg.h'
@@ -108,7 +108,7 @@
 *********************************************************************************************************
 *                                CPU COUNT LEADING ZEROS CONFIGURATION
 *
-* Note(s) : (1) Configure CPU_CFG_LEAD_ZEROS_ASM_PRESENT to prototype/define count leading zeros bits 
+* Note(s) : (1) Configure CPU_CFG_LEAD_ZEROS_ASM_PRESENT to prototype/define count leading zeros bits
 *               function(s) in :
 *
 *               (a) 'cpu.h'/'cpu_a.asm',       if CPU_CFG_LEAD_ZEROS_ASM_PRESENT      #define'd in 'cpu.h'/

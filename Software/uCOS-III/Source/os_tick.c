@@ -14,11 +14,11 @@
 *
 * LICENSING TERMS:
 * ---------------
-*           uC/OS-III is provided in source form for FREE short-term evaluation, for educational use or 
+*           uC/OS-III is provided in source form for FREE short-term evaluation, for educational use or
 *           for peaceful research.  If you plan or intend to use uC/OS-III in a commercial application/
-*           product then, you need to contact Micrium to properly license uC/OS-III for its use in your 
-*           application/product.   We provide ALL the source code for your convenience and to help you 
-*           experience uC/OS-III.  The fact that the source is provided does NOT mean that you can use 
+*           product then, you need to contact Micrium to properly license uC/OS-III for its use in your
+*           application/product.   We provide ALL the source code for your convenience and to help you
+*           experience uC/OS-III.  The fact that the source is provided does NOT mean that you can use
 *           it commercially without paying a licensing fee.
 *
 *           Knowledge of the source code may NOT be used to develop a similar product.
@@ -207,7 +207,7 @@ void  OS_TickTaskInit (OS_ERR  *p_err)
 ************************************************************************************************************************
 *                                                      INSERT
 *
-* Description: This task is internal to uC/OS-III and allows the insertion of a task in a tick list. 
+* Description: This task is internal to uC/OS-III and allows the insertion of a task in a tick list.
 *
 * Arguments  : p_list      is a pointer to the desired list
 *
@@ -254,7 +254,7 @@ void  OS_TickListInsert (OS_TICK_LIST  *p_list,
                 if (p_tcb2->TickPrevPtr == DEF_NULL) {          /* Insert before the first entry in the list?           */
                     p_tcb->TickRemain   = remain;               /* Yes, Store remaining time                            */
                     p_tcb->TickPrevPtr  = DEF_NULL;
-                    p_tcb->TickNextPtr  = p_tcb2;    
+                    p_tcb->TickNextPtr  = p_tcb2;
                     p_tcb->TickListPtr  = p_list;               /* Link TCB to this list                                */
                     p_tcb2->TickRemain -= remain;               /* Reduce time of next entry in the list                */
                     p_tcb2->TickPrevPtr = p_tcb;
@@ -269,7 +269,7 @@ void  OS_TickListInsert (OS_TICK_LIST  *p_list,
                     p_tcb1              = p_tcb2->TickPrevPtr;
                     p_tcb->TickRemain   = remain;               /* Store remaining time                                 */
                     p_tcb->TickPrevPtr  = p_tcb1;
-                    p_tcb->TickNextPtr  = p_tcb2;    
+                    p_tcb->TickNextPtr  = p_tcb2;
                     p_tcb->TickListPtr  = p_list;               /* TCB points to this list                              */
                     p_tcb2->TickRemain -= remain;               /* Reduce time of next entry in the list                */
                     p_tcb2->TickPrevPtr = p_tcb;
@@ -291,9 +291,9 @@ void  OS_TickListInsert (OS_TICK_LIST  *p_list,
                 remain -= p_tcb2->TickRemain;                   /* Point to the next TCB in the list                    */
                 p_tcb1  = p_tcb2;
                 p_tcb2  = p_tcb2->TickNextPtr;
-            }                 
+            }
         }
-        p_tcb->TickRemain   = remain;                       
+        p_tcb->TickRemain   = remain;
         p_tcb->TickPrevPtr  = p_tcb1;
         p_tcb->TickNextPtr  = DEF_NULL;
         p_tcb->TickListPtr  = p_list;                           /* Link the list to the TCB                             */
@@ -315,7 +315,7 @@ void  OS_TickListInsert (OS_TICK_LIST  *p_list,
 ************************************************************************************************************************
 *                                            ADD TASK TO DELAYED TICK LIST
 *
-* Description: This function is called to place a task in a list of task waiting for either time to expire 
+* Description: This function is called to place a task in a list of task waiting for either time to expire
 *
 * Arguments  : p_tcb          is a pointer to the OS_TCB of the task to add to the tick list
 *              -----
@@ -445,7 +445,7 @@ void  OS_TickListRemove (OS_TCB  *p_tcb)
             p_tcb->TickListPtr  = DEF_NULL;
         }
     } else {
-        p_tcb1->TickNextPtr = p_tcb2;    
+        p_tcb1->TickNextPtr = p_tcb2;
         if (p_tcb2 != DEF_NULL) {
             p_tcb2->TickPrevPtr = p_tcb1;
             p_tcb2->TickRemain += p_tcb->TickRemain;            /* Add back the ticks to the delta list                 */
@@ -485,7 +485,7 @@ static  CPU_TS  OS_TickListUpdateDly (OS_TICK ticks)
 #if (OS_CFG_DBG_EN == DEF_ENABLED)
     OS_OBJ_QTY    nbr_updated;
 #endif
-                                                                        
+
                                                                 /*  ========= UPDATE TASKS WAITING FOR DELAY =========  */
 #if (OS_CFG_TS_EN == DEF_ENABLED)
     ts_start    = OS_TS_GET();
@@ -494,7 +494,7 @@ static  CPU_TS  OS_TickListUpdateDly (OS_TICK ticks)
     nbr_updated = (OS_OBJ_QTY)0u;
 #endif
     p_list      = &OSTickListDly;
-    p_tcb       = p_list->TCB_Ptr;                                      
+    p_tcb       = p_list->TCB_Ptr;
     if (p_tcb != DEF_NULL) {
         if (p_tcb->TickRemain <= ticks) {
             ticks = ticks - p_tcb->TickRemain;
@@ -589,7 +589,7 @@ static  CPU_TS  OS_TickListUpdateTimeout (OS_TICK ticks)
     nbr_updated = 0u;
 #endif
     p_list      = &OSTickListTimeout;
-    p_tcb       = p_list->TCB_Ptr;                                  
+    p_tcb       = p_list->TCB_Ptr;
     if (p_tcb != DEF_NULL) {
 #if 0
         p_tcb->TickRemain--;

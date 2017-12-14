@@ -7,12 +7,12 @@
 *
 *               All rights reserved.  Protected by international copyright laws.
 *
-*               uC/CPU is provided in source form to registered licensees ONLY.  It is 
-*               illegal to distribute this source code to any third party unless you receive 
-*               written permission by an authorized Micrium representative.  Knowledge of 
+*               uC/CPU is provided in source form to registered licensees ONLY.  It is
+*               illegal to distribute this source code to any third party unless you receive
+*               written permission by an authorized Micrium representative.  Knowledge of
 *               the source code may NOT be used to develop a similar product.
 *
-*               Please help us continue to provide the Embedded community with the finest 
+*               Please help us continue to provide the Embedded community with the finest
 *               software available.  Your honesty is greatly appreciated.
 *
 *               You can find our product's user manual, API reference, release notes and
@@ -37,7 +37,7 @@
 *********************************************************************************************************
 *                                               MODULE
 *
-* Note(s) : (1) This cache CPU header file is protected from multiple pre-processor inclusion through use of 
+* Note(s) : (1) This cache CPU header file is protected from multiple pre-processor inclusion through use of
 *               the  cache CPU module present pre-processor macro definition.
 *********************************************************************************************************
 */

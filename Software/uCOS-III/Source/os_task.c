@@ -3053,7 +3053,7 @@ void  OS_TaskSuspend (OS_TCB  *p_tcb,
         case OS_TASK_STATE_DLY_SUSPENDED:
         case OS_TASK_STATE_PEND_SUSPENDED:
         case OS_TASK_STATE_PEND_TIMEOUT_SUSPENDED:
-			if (p_tcb->SuspendCtr == (OS_NESTING_CTR)-1) {
+            if (p_tcb->SuspendCtr == (OS_NESTING_CTR)-1) {
                  CPU_CRITICAL_EXIT();
                 *p_err = OS_ERR_TASK_SUSPEND_CTR_OVF;
                  return;
