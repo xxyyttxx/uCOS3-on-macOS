@@ -81,7 +81,11 @@ extern  "C" {
 *********************************************************************************************************
 */
 
+#if 0 // 使用静态优先级50会导致超出macOS的优先级范围(本机上是15~47)，改成 max-1 (这里要求 min!=max)
 #define  THREAD_CREATE_PRIO       50u                           /* Tasks underlying posix threads prio.                 */
+#else
+#define  THREAD_CREATE_PRIO       (sched_get_priority_max(SCHED_RR)-1)
+#endif
 
                                                                 /* Err handling convenience macro.                      */
 #define  ERR_CHK(func)            do {int res = func; \
@@ -101,8 +105,13 @@ extern  "C" {
 typedef  struct  os_tcb_ext_posix {
     pthread_t  Thread;
     pid_t      ProcessId;
+#if 0 // 苹果不支持创建无名的信号量 -- http://blog.csdn.net/xiadasong007/article/details/8534184
     sem_t      InitSem;
     sem_t      Sem;
+#else
+    sem_t     *pInitSem;
+    sem_t     *pSem;
+#endif
 } OS_TCB_EXT_POSIX;
 
 
@@ -193,6 +202,7 @@ void  OSIdleTaskHook (void)
 
 void  OSInitHook (void)
 {
+#if 0 // macOS 没有 linux-limit 的 RTPRIO，这里省去判断 (但是 Mach 好像有 realtime threads)
     struct  rlimit  rtprio_limits;
 
 
@@ -201,6 +211,7 @@ void  OSInitHook (void)
         printf("Error: RTPRIO limit is too low. Set to 'unlimited' via 'ulimit -r' or /etc/security/limits.conf\r\n");
         exit(-1);
     }
+#endif
 
     CPU_IntInit();                                              /* Initialize critical section objects.                 */
 }
@@ -256,13 +267,22 @@ void  OSTaskCreateHook (OS_TCB  *p_tcb)
     p_tcb_ext = malloc(sizeof(OS_TCB_EXT_POSIX));
     p_tcb->ExtPtr = p_tcb_ext;
 
+#if 0
     ERR_CHK(sem_init(&p_tcb_ext->InitSem, 0u, 0u));
     ERR_CHK(sem_init(&p_tcb_ext->Sem, 0u, 0u));
+#else
+    if ((p_tcb_ext->pInitSem = sem_open(tmpnam(NULL), O_CREAT|O_EXCL, 0700, 0u)) == SEM_FAILED) ERR_CHK(errno);
+    if ((p_tcb_ext->pSem = sem_open(tmpnam(NULL), O_CREAT|O_EXCL, 0700, 0u)) == SEM_FAILED) ERR_CHK(errno);
+#endif
 
     OSThreadCreate(&p_tcb_ext->Thread, OSTaskPosix, p_tcb, THREAD_CREATE_PRIO);
 
     do {
+#if 0
         ret = sem_wait(&p_tcb_ext->InitSem);                    /* Wait for init.                                       */
+#else
+        ret = sem_wait(p_tcb_ext->pInitSem);                    /* Wait for init.                                       */
+#endif
         if (ret != 0 && errno != EINTR) {
             raise(SIGABRT);
         }
@@ -474,7 +494,11 @@ void  OSStartHighRdy (void)
 
     CPU_INT_DIS();
 
+#if 0
     ERR_CHK(sem_post(&p_tcb_ext->Sem));
+#else
+    ERR_CHK(sem_post(p_tcb_ext->pSem));
+#endif
 
     ERR_CHK(sigemptyset(&sig_set));
     ERR_CHK(sigaddset(&sig_set, SIGTERM));
@@ -539,11 +563,19 @@ void  OSCtxSw (void)
     OSTCBCurPtr = OSTCBHighRdyPtr;
     OSPrioCur   = OSPrioHighRdy;
 
+#if 0
     ERR_CHK(sem_post(&p_tcb_ext_new->Sem));
+#else
+    ERR_CHK(sem_post(p_tcb_ext_new->pSem));
+#endif
 
     if (detach == DEF_NO) {
         do {
+#if 0
             ret = sem_wait(&p_tcb_ext_old->Sem);
+#else
+            ret = sem_wait(p_tcb_ext_old->pSem);
+#endif
             if (ret != 0 && errno != EINTR) {
                 raise(SIGABRT);
             }
@@ -637,8 +669,17 @@ static void  *OSTaskPosix (void  *p_arg)
     p_tcb     = (OS_TCB           *)p_arg;
     p_tcb_ext = (OS_TCB_EXT_POSIX *)p_tcb->ExtPtr;
 
+#if 0 // warning: 'syscall' is deprecated: first deprecated in macOS 10.12 - syscall(2) is unsupported; please switch to a supported interface. For SYS_kdebug_trace use kdebug_signpost(). [-Wdeprecated-declarations]
     p_tcb_ext->ProcessId = syscall(SYS_gettid);
+#else
+    p_tcb_ext->ProcessId = getpid();
+#endif
+
+#if 0
     ERR_CHK(sem_post(&p_tcb_ext->InitSem));
+#else
+    ERR_CHK(sem_post(p_tcb_ext->pInitSem));
+#endif
 
 #ifdef OS_CFG_MSG_TRACE_EN
     if (p_tcb->NamePtr != DEF_NULL) {
@@ -650,7 +691,11 @@ static void  *OSTaskPosix (void  *p_arg)
     {
         int ret = -1u;
         while (ret != 0u) {
+#if 0
             ret = sem_wait(&p_tcb_ext->Sem);                    /* Wait until first CTX SW.                             */
+#else
+            ret = sem_wait(p_tcb_ext->pSem);                    /* Wait until first CTX SW.                             */
+#endif
             if ((ret != 0) && (ret != -EINTR)) {
                 ERR_CHK(ret);
             }
@@ -731,7 +776,7 @@ static  void  OSThreadCreate (pthread_t  *p_thread,
 
     ERR_CHK(pthread_attr_init(&attr));
     ERR_CHK(pthread_attr_setinheritsched(&attr, PTHREAD_EXPLICIT_SCHED));
-    param.__sched_priority = prio;
+    param.sched_priority = prio;
     ERR_CHK(pthread_attr_setschedpolicy(&attr, SCHED_RR));
     ERR_CHK(pthread_attr_setschedparam(&attr, &param));
     ERR_CHK(pthread_create(p_thread, &attr, p_task, p_arg));

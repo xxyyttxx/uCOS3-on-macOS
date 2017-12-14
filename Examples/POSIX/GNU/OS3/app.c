@@ -35,6 +35,7 @@
 #include  <app_cfg.h>
 #include  <os.h>
 #include  <stdio.h>
+#include  <signal.h>
 
 #include  <lib_mem.h>
 #include  <lib_math.h>
@@ -144,5 +145,9 @@ static  void  App_TaskStart (void *p_arg)
         OSTimeDlyHMSM(0u, 0u, 1u, 0u,
                       OS_OPT_TIME_HMSM_STRICT,
                       &os_err);
+        if (os_err != 0u) {
+            printf("Error in call '%s' from %s(): os_err_code<%d>\r\n", "OSTimeDlyHMSM", __FUNCTION__, os_err);
+            raise(SIGABRT);
+        }
     }
 }

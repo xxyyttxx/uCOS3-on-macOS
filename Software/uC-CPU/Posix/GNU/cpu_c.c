@@ -41,6 +41,10 @@
 *********************************************************************************************************
 */
 
+#if !defined(_XOPEN_SOURCE) || _XOPEN_SOURCE < 600
+#error see Notes in this file's header, in macOS recommand define it to 700.
+#endif
+
 /*
 *********************************************************************************************************
 *                                            INCLUDE FILES
@@ -300,7 +304,7 @@ void  CPU_TmrInterruptCreate (CPU_TMR_INTERRUPT  *p_tmr_interrupt)
     if (res != 0u) {
         raise(SIGABRT);
     }
-    param.__sched_priority = CPU_TMR_INT_TASK_PRIO;
+    param.sched_priority = CPU_TMR_INT_TASK_PRIO;
     pthread_attr_setschedpolicy(&attr, SCHED_RR);
     if (res != 0u) {
         raise(SIGABRT);
@@ -925,8 +929,19 @@ static  void  *CPU_TmrInterruptTask (void  *p_arg) {
 
     do {
         tspec_rem = tspec;
+#if 0 // macOS not define clock_nanosleep, which is first released in Issue 6
         do {res = clock_nanosleep(CLOCK_MONOTONIC, 0u, &tspec_rem, &tspec_rem); } while (res == EINTR);
         if (res != 0u) { raise(SIGABRT); }
+        // MDZZ 真的很想 positioning raise 了 <- 自己用老一套思维瞎写，怪谁
+#else
+        while ((res = nanosleep(&tspec_rem, &tspec_rem))) {
+                if (errno == EINTR) continue;
+                printf("Error in call '%s' from %s(): %s\r\n", "nanosleep", __FUNCTION__, strerror(res));
+                perror(" \\->'errno' indicates (might not be relevant if function doesn't use 'errno')");
+                raise(SIGABRT);
+        }
+#endif // posix 信号冲突解决方案，居然在这里看到了，看来很常用。
+
         CPU_InterruptTriggerInternal(&(p_tmr_int->Interrupt));  /* See Note #2.                                         */
     } while (one_shot != DEF_YES);
 
