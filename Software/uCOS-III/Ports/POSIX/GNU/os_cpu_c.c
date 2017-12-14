@@ -86,7 +86,7 @@ extern  "C" {
                                                                 /* Err handling convenience macro.                      */
 #define  ERR_CHK(func)            do {int res = func; \
                                       if (res != 0u) { \
-                                          printf("Error in call '%s' from %s(): %s­\r\n", #func, __FUNCTION__, strerror(res)); \
+                                          printf("Error in call '%s' from %s(): %s\r\n", #func, __FUNCTION__, strerror(res)); \
                                           perror(" \\->'errno' indicates (might not be relevant if function doesn't use 'errno')"); \
                                           raise(SIGABRT); \
                                       } \
