@@ -7,12 +7,12 @@
 *
 *               All rights reserved.  Protected by international copyright laws.
 *
-*               uC/CPU is provided in source form to registered licensees ONLY.  It is 
-*               illegal to distribute this source code to any third party unless you receive 
-*               written permission by an authorized Micrium representative.  Knowledge of 
+*               uC/CPU is provided in source form to registered licensees ONLY.  It is
+*               illegal to distribute this source code to any third party unless you receive
+*               written permission by an authorized Micrium representative.  Knowledge of
 *               the source code may NOT be used to develop a similar product.
 *
-*               Please help us continue to provide the Embedded community with the finest 
+*               Please help us continue to provide the Embedded community with the finest
 *               software available.  Your honesty is greatly appreciated.
 *
 *               You can find our product's user manual, API reference, release notes and
@@ -31,7 +31,7 @@
 * Programmer(s) : SR
 *                 ITJ
 *********************************************************************************************************
-* Note(s)       : (1) Assumes the following versions (or more recent) of software modules are included in 
+* Note(s)       : (1) Assumes the following versions (or more recent) of software modules are included in
 *                     the project build :
 *
 *                     (a) uC/LIB V1.35.00
@@ -43,7 +43,7 @@
 *********************************************************************************************************
 *                                               MODULE
 *
-* Note(s) : (1) This core CPU header file is protected from multiple pre-processor inclusion through use of 
+* Note(s) : (1) This core CPU header file is protected from multiple pre-processor inclusion through use of
 *               the  core CPU module present pre-processor macro definition.
 *********************************************************************************************************
 */
@@ -200,7 +200,7 @@ typedef enum cpu_err {
 *********************************************************************************************************
 *                                      CPU TIMESTAMP DATA TYPES
 *
-* Note(s) : (1) CPU timestamp timer data type defined to the binary-multiple of 8-bit octets as configured 
+* Note(s) : (1) CPU timestamp timer data type defined to the binary-multiple of 8-bit octets as configured
 *               by 'CPU_CFG_TS_TMR_SIZE' (see 'cpu_cfg.h  CPU TIMESTAMP CONFIGURATION  Note #2').
 *********************************************************************************************************
 */
@@ -292,7 +292,7 @@ CPU_CORE_EXT  CPU_TS_TMR       CPU_IntDisMeasMax_cnts;          /* ... non-reset
 * Caller(s)   : various.
 *
 * Note(s)     : (1) CPU_SW_EXCEPTION() deadlocks the current code execution -- whether multi-tasked/
-*                   -processed/-threaded or single-threaded -- when the current code execution cannot 
+*                   -processed/-threaded or single-threaded -- when the current code execution cannot
 *                   gracefully recover or report a fault or exception condition.
 *
 *                   Example CPU_SW_EXCEPTION() call :
@@ -310,10 +310,10 @@ CPU_CORE_EXT  CPU_TS_TMR       CPU_IntDisMeasMax_cnts;          /* ... non-reset
 *
 *                   See also 'cpu_core.c  CPU_SW_Exception()  Note #1'.
 *
-*               (2) (a) CPU_SW_EXCEPTION()  MAY be developer-implemented to output &/or handle any error or 
-*                       exception conditions; but since CPU_SW_EXCEPTION() is intended to trap unrecoverable 
-*                       software  conditions, it is recommended that developer-implemented versions prevent 
-*                       execution of any code following calls to CPU_SW_EXCEPTION() by deadlocking the code 
+*               (2) (a) CPU_SW_EXCEPTION()  MAY be developer-implemented to output &/or handle any error or
+*                       exception conditions; but since CPU_SW_EXCEPTION() is intended to trap unrecoverable
+*                       software  conditions, it is recommended that developer-implemented versions prevent
+*                       execution of any code following calls to CPU_SW_EXCEPTION() by deadlocking the code
 *                       (see Note #1).
 *
 *                           Example CPU_SW_EXCEPTION() :
@@ -323,10 +323,10 @@ CPU_CORE_EXT  CPU_TS_TMR       CPU_IntDisMeasMax_cnts;          /* ... non-reset
 *                                                                               CPU_SW_Exception();      \
 *                                                                           } while (0)
 *
-*                   (b) (1) However, if execution of code following calls to CPU_SW_EXCEPTION() is required 
-*                           (e.g. for automated testing); it is recommended that the last statement in 
-*                           developer-implemented versions be to return from the current function to prevent 
-*                           possible software exception(s) in the current function from triggering CPU &/or 
+*                   (b) (1) However, if execution of code following calls to CPU_SW_EXCEPTION() is required
+*                           (e.g. for automated testing); it is recommended that the last statement in
+*                           developer-implemented versions be to return from the current function to prevent
+*                           possible software exception(s) in the current function from triggering CPU &/or
 *                           hardware exception(s).
 *
 *                           Example CPU_SW_EXCEPTION() :
@@ -336,19 +336,19 @@ CPU_CORE_EXT  CPU_TS_TMR       CPU_IntDisMeasMax_cnts;          /* ... non-reset
 *                                                                               return  err_rtn_val;     \
 *                                                                           } while (0)
 *
-*                           (A) Note that 'err_rtn_val' in the return statement MUST NOT be enclosed in 
-*                               parentheses.  This allows CPU_SW_EXCEPTION() to return from functions that 
+*                           (A) Note that 'err_rtn_val' in the return statement MUST NOT be enclosed in
+*                               parentheses.  This allows CPU_SW_EXCEPTION() to return from functions that
 *                               return 'void', i.e. NO return type or value (see also Note #2b2A).
 *
-*                       (2) In order for CPU_SW_EXCEPTION() to return from functions with various return 
-*                           types/values, each caller function MUST pass an appropriate error return type 
+*                       (2) In order for CPU_SW_EXCEPTION() to return from functions with various return
+*                           types/values, each caller function MUST pass an appropriate error return type
 *                           & value to CPU_SW_EXCEPTION().
 *
-*                           (A) Note that CPU_SW_EXCEPTION()  MUST NOT be passed any return type or value 
-*                               for functions that return 'void', i.e. NO return type or value; but SHOULD 
-*                               instead be passed a single semicolon.  This prevents possible compiler 
-*                               warnings that CPU_SW_EXCEPTION() is passed too few arguments.  However, 
-*                               the compiler may warn that CPU_SW_EXCEPTION() does NOT prevent creating 
+*                           (A) Note that CPU_SW_EXCEPTION()  MUST NOT be passed any return type or value
+*                               for functions that return 'void', i.e. NO return type or value; but SHOULD
+*                               instead be passed a single semicolon.  This prevents possible compiler
+*                               warnings that CPU_SW_EXCEPTION() is passed too few arguments.  However,
+*                               the compiler may warn that CPU_SW_EXCEPTION() does NOT prevent creating
 *                               null statements on lines with NO other code statements.
 *
 *                           Example CPU_SW_EXCEPTION() calls :
@@ -400,7 +400,7 @@ CPU_CORE_EXT  CPU_TS_TMR       CPU_IntDisMeasMax_cnts;          /* ... non-reset
 *********************************************************************************************************
 *                                           CPU_VAL_UNUSED()
 *
-* Description : 
+* Description :
 *
 * Argument(s) : none.
 *
@@ -437,19 +437,19 @@ CPU_CORE_EXT  CPU_TS_TMR       CPU_IntDisMeasMax_cnts;          /* ... non-reset
 *
 * Caller(s)   : various.
 *
-* Note(s)     : (1) (a) Generic type values should be #define'd with large, non-trivial values to trap 
+* Note(s)     : (1) (a) Generic type values should be #define'd with large, non-trivial values to trap
 *                       & discard invalid/corrupted objects based on type value.
 *
-*                       In other words, by assigning large, non-trivial values to valid objects' type 
-*                       fields; the likelihood that an object with an unassigned &/or corrupted type 
-*                       field will contain a value is highly improbable & therefore the object itself 
+*                       In other words, by assigning large, non-trivial values to valid objects' type
+*                       fields; the likelihood that an object with an unassigned &/or corrupted type
+*                       field will contain a value is highly improbable & therefore the object itself
 *                       will be trapped as invalid.
 *
 *                   (b) (1) CPU_TYPE_CREATE()  creates a 32-bit type value from four values.
 *
-*                       (2) Ideally, generic type values SHOULD be created from 'CPU_CHAR' characters to 
-*                           represent ASCII string abbreviations of the specific object types.  Memory 
-*                           displays of object type values will display the specific object types with 
+*                       (2) Ideally, generic type values SHOULD be created from 'CPU_CHAR' characters to
+*                           represent ASCII string abbreviations of the specific object types.  Memory
+*                           displays of object type values will display the specific object types with
 *                           their chosen ASCII names.
 *
 *                           Examples :
@@ -494,7 +494,7 @@ CPU_CORE_EXT  CPU_TS_TMR       CPU_IntDisMeasMax_cnts;          /* ... non-reset
 *********************************************************************************************************
 *                                         FUNCTION PROTOTYPES
 *
-* Note(s) : (1) CPU interrupts disabled time measurement functions prototyped/defined only if 
+* Note(s) : (1) CPU interrupts disabled time measurement functions prototyped/defined only if
 *               CPU_CFG_INT_DIS_MEAS_EN  #define'd in 'cpu_cfg.h'.
 *
 *           (2) (a) CPU_CntLeadZeros()  defined in :
@@ -605,7 +605,7 @@ CPU_DATA         CPU_CntLeadZeros64       (CPU_INT64U  val);
 extern  "C" {
 #endif
 #endif
-  
+
 CPU_DATA         CPU_CntTrailZeros        (CPU_DATA    val);
 
 #ifdef  CPU_CFG_LEAD_ZEROS_ASM_PRESENT
@@ -651,7 +651,7 @@ CPU_INT08U       CPU_PopCnt32             (CPU_INT32U  value);
 *               This function is an INTERNAL CPU module function & MUST be implemented by application/
 *               BSP function(s) [see Note #1] but MUST NOT be called by application function(s).
 *
-* Note(s)     : (1) CPU_TS_TmrInit() is an application/BSP function that MUST be defined by the developer 
+* Note(s)     : (1) CPU_TS_TmrInit() is an application/BSP function that MUST be defined by the developer
 *                   if either of the following CPU features is enabled :
 *
 *                   (a) CPU timestamps
@@ -660,19 +660,19 @@ CPU_INT08U       CPU_PopCnt32             (CPU_INT32U  value);
 *                   See 'cpu_cfg.h  CPU TIMESTAMP CONFIGURATION  Note #1'
 *                     & 'cpu_cfg.h  CPU INTERRUPTS DISABLED TIME MEASUREMENT CONFIGURATION  Note #1a'.
 *
-*               (2) (a) Timer count values MUST be returned via word-size-configurable 'CPU_TS_TMR' 
+*               (2) (a) Timer count values MUST be returned via word-size-configurable 'CPU_TS_TMR'
 *                       data type.
 *
-*                       (1) If timer has more bits, truncate timer values' higher-order bits greater 
+*                       (1) If timer has more bits, truncate timer values' higher-order bits greater
 *                           than the configured 'CPU_TS_TMR' timestamp timer data type word size.
 *
-*                       (2) Since the timer MUST NOT have less bits than the configured 'CPU_TS_TMR' 
-*                           timestamp timer data type word size; 'CPU_CFG_TS_TMR_SIZE' MUST be 
+*                       (2) Since the timer MUST NOT have less bits than the configured 'CPU_TS_TMR'
+*                           timestamp timer data type word size; 'CPU_CFG_TS_TMR_SIZE' MUST be
 *                           configured so that ALL bits in 'CPU_TS_TMR' data type are significant.
 *
-*                           In other words, if timer size is not a binary-multiple of 8-bit octets 
-*                           (e.g. 20-bits or even 24-bits), then the next lower, binary-multiple 
-*                           octet word size SHOULD be configured (e.g. to 16-bits).  However, the 
+*                           In other words, if timer size is not a binary-multiple of 8-bit octets
+*                           (e.g. 20-bits or even 24-bits), then the next lower, binary-multiple
+*                           octet word size SHOULD be configured (e.g. to 16-bits).  However, the
 *                           minimum supported word size for CPU timestamp timers is 8-bits.
 *
 *                       See also 'cpu_cfg.h   CPU TIMESTAMP CONFIGURATION  Note #2'
@@ -680,8 +680,8 @@ CPU_INT08U       CPU_PopCnt32             (CPU_INT32U  value);
 *
 *                   (b) Timer SHOULD be an 'up'  counter whose values increase with each time count.
 *
-*                   (c) When applicable, timer period SHOULD be less than the typical measured time 
-*                       but MUST be less than the maximum measured time; otherwise, timer resolution 
+*                   (c) When applicable, timer period SHOULD be less than the typical measured time
+*                       but MUST be less than the maximum measured time; otherwise, timer resolution
 *                       inadequate to measure desired times.
 *
 *                   See also 'CPU_TS_TmrRd()  Note #2'.
@@ -712,7 +712,7 @@ void  CPU_TS_TmrInit(void);
 *               This function is an INTERNAL CPU module function & MUST be implemented by application/
 *               BSP function(s) [see Note #1] but SHOULD NOT be called by application function(s).
 *
-* Note(s)     : (1) CPU_TS_TmrRd() is an application/BSP function that MUST be defined by the developer 
+* Note(s)     : (1) CPU_TS_TmrRd() is an application/BSP function that MUST be defined by the developer
 *                   if either of the following CPU features is enabled :
 *
 *                   (a) CPU timestamps
@@ -721,19 +721,19 @@ void  CPU_TS_TmrInit(void);
 *                   See 'cpu_cfg.h  CPU TIMESTAMP CONFIGURATION  Note #1'
 *                     & 'cpu_cfg.h  CPU INTERRUPTS DISABLED TIME MEASUREMENT CONFIGURATION  Note #1a'.
 *
-*               (2) (a) Timer count values MUST be returned via word-size-configurable 'CPU_TS_TMR' 
+*               (2) (a) Timer count values MUST be returned via word-size-configurable 'CPU_TS_TMR'
 *                       data type.
 *
-*                       (1) If timer has more bits, truncate timer values' higher-order bits greater 
+*                       (1) If timer has more bits, truncate timer values' higher-order bits greater
 *                           than the configured 'CPU_TS_TMR' timestamp timer data type word size.
 *
-*                       (2) Since the timer MUST NOT have less bits than the configured 'CPU_TS_TMR' 
-*                           timestamp timer data type word size; 'CPU_CFG_TS_TMR_SIZE' MUST be 
+*                       (2) Since the timer MUST NOT have less bits than the configured 'CPU_TS_TMR'
+*                           timestamp timer data type word size; 'CPU_CFG_TS_TMR_SIZE' MUST be
 *                           configured so that ALL bits in 'CPU_TS_TMR' data type are significant.
 *
-*                           In other words, if timer size is not a binary-multiple of 8-bit octets 
-*                           (e.g. 20-bits or even 24-bits), then the next lower, binary-multiple 
-*                           octet word size SHOULD be configured (e.g. to 16-bits).  However, the 
+*                           In other words, if timer size is not a binary-multiple of 8-bit octets
+*                           (e.g. 20-bits or even 24-bits), then the next lower, binary-multiple
+*                           octet word size SHOULD be configured (e.g. to 16-bits).  However, the
 *                           minimum supported word size for CPU timestamp timers is 8-bits.
 *
 *                       See also 'cpu_cfg.h   CPU TIMESTAMP CONFIGURATION  Note #2'
@@ -744,18 +744,18 @@ void  CPU_TS_TmrInit(void);
 *                       (1) If timer is a 'down' counter whose values decrease with each time count,
 *                           then the returned timer value MUST be ones-complemented.
 *
-*                   (c) (1) When applicable, the amount of time measured by CPU timestamps is 
+*                   (c) (1) When applicable, the amount of time measured by CPU timestamps is
 *                           calculated by either of the following equations :
 *
 *                           (A) Time measured  =  Number timer counts  *  Timer period
 *
 *                                   where
 *
-*                                       Number timer counts     Number of timer counts measured 
-*                                       Timer period            Timer's period in some units of 
+*                                       Number timer counts     Number of timer counts measured
+*                                       Timer period            Timer's period in some units of
 *                                                                   (fractional) seconds
-*                                       Time measured           Amount of time measured, in same 
-*                                                                   units of (fractional) seconds 
+*                                       Time measured           Amount of time measured, in same
+*                                                                   units of (fractional) seconds
 *                                                                   as the Timer period
 *
 *                                                  Number timer counts
@@ -765,12 +765,12 @@ void  CPU_TS_TmrInit(void);
 *                                   where
 *
 *                                       Number timer counts     Number of timer counts measured
-*                                       Timer frequency         Timer's frequency in some units 
+*                                       Timer frequency         Timer's frequency in some units
 *                                                                   of counts per second
 *                                       Time measured           Amount of time measured, in seconds
 *
-*                       (2) Timer period SHOULD be less than the typical measured time but MUST be less 
-*                           than the maximum measured time; otherwise, timer resolution inadequate to 
+*                       (2) Timer period SHOULD be less than the typical measured time but MUST be less
+*                           than the maximum measured time; otherwise, timer resolution inadequate to
 *                           measure desired times.
 *********************************************************************************************************
 */
@@ -792,12 +792,12 @@ CPU_TS_TMR  CPU_TS_TmrRd(void);
 *
 * Caller(s)   : Application.
 *
-*               This function is an (optional) CPU module application programming interface (API) 
-*               function which MAY be implemented by application/BSP function(s) [see Note #1] & 
+*               This function is an (optional) CPU module application programming interface (API)
+*               function which MAY be implemented by application/BSP function(s) [see Note #1] &
 *               MAY be called by application function(s).
 *
-* Note(s)     : (1) CPU_TS32_to_uSec()/CPU_TS64_to_uSec() are application/BSP functions that MAY be 
-*                   optionally defined by the developer when either of the following CPU features is 
+* Note(s)     : (1) CPU_TS32_to_uSec()/CPU_TS64_to_uSec() are application/BSP functions that MAY be
+*                   optionally defined by the developer when either of the following CPU features is
 *                   enabled :
 *
 *                   (a) CPU timestamps
@@ -806,7 +806,7 @@ CPU_TS_TMR  CPU_TS_TmrRd(void);
 *                   See 'cpu_cfg.h  CPU TIMESTAMP CONFIGURATION  Note #1'
 *                     & 'cpu_cfg.h  CPU INTERRUPTS DISABLED TIME MEASUREMENT CONFIGURATION  Note #1a'.
 *
-*               (2) (a) The amount of time measured by CPU timestamps is calculated by either of 
+*               (2) (a) The amount of time measured by CPU timestamps is calculated by either of
 *                       the following equations :
 *
 *                                                                        10^6 microseconds
@@ -820,18 +820,18 @@ CPU_TS_TMR  CPU_TS_TmrRd(void);
 *                               where
 *
 *                                   (A) Number timer counts     Number of timer counts measured
-*                                   (B) Timer frequency         Timer's frequency in some units 
+*                                   (B) Timer frequency         Timer's frequency in some units
 *                                                                   of counts per second
-*                                   (C) Timer period            Timer's period in some units of 
+*                                   (C) Timer period            Timer's period in some units of
 *                                                                   (fractional)  seconds
-*                                   (D) Time measured           Amount of time measured, 
+*                                   (D) Time measured           Amount of time measured,
 *                                                                   in microseconds
 *
-*                   (b) Timer period SHOULD be less than the typical measured time but MUST be less 
-*                       than the maximum measured time; otherwise, timer resolution inadequate to 
+*                   (b) Timer period SHOULD be less than the typical measured time but MUST be less
+*                       than the maximum measured time; otherwise, timer resolution inadequate to
 *                       measure desired times.
 *
-*                   (c) Specific implementations may convert any number of CPU_TS32 or CPU_TS64 bits 
+*                   (c) Specific implementations may convert any number of CPU_TS32 or CPU_TS64 bits
 *                       -- up to 32 or 64, respectively -- into microseconds.
 *********************************************************************************************************
 */

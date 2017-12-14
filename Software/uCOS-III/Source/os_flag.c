@@ -14,11 +14,11 @@
 *
 * LICENSING TERMS:
 * ---------------
-*           uC/OS-III is provided in source form for FREE short-term evaluation, for educational use or 
+*           uC/OS-III is provided in source form for FREE short-term evaluation, for educational use or
 *           for peaceful research.  If you plan or intend to use uC/OS-III in a commercial application/
-*           product then, you need to contact Micrium to properly license uC/OS-III for its use in your 
-*           application/product.   We provide ALL the source code for your convenience and to help you 
-*           experience uC/OS-III.  The fact that the source is provided does NOT mean that you can use 
+*           product then, you need to contact Micrium to properly license uC/OS-III for its use in your
+*           application/product.   We provide ALL the source code for your convenience and to help you
+*           experience uC/OS-III.  The fact that the source is provided does NOT mean that you can use
 *           it commercially without paying a licensing fee.
 *
 *           Knowledge of the source code may NOT be used to develop a similar product.
@@ -126,7 +126,7 @@ void  OSFlagCreate (OS_FLAG_GRP  *p_grp,
 #if (defined(TRACE_CFG_EN) && (TRACE_CFG_EN == DEF_ENABLED))
     TRACE_OS_FLAG_CREATE(p_grp, p_name);                        /* Record the event.                                    */
 #endif
-    
+
     OS_CRITICAL_EXIT_NO_SCHED();
    *p_err = OS_ERR_NONE;
 }
@@ -480,7 +480,7 @@ OS_FLAGS  OSFlagPend (OS_FLAG_GRP  *p_grp,
                      }
                  }
                                                                 /* Lock the scheduler/re-enable interrupts              */
-                 OS_CRITICAL_ENTER_CPU_EXIT();              
+                 OS_CRITICAL_ENTER_CPU_EXIT();
                  OS_FlagBlock(&pend_data,
                               p_grp,
                               flags,
@@ -521,7 +521,7 @@ OS_FLAGS  OSFlagPend (OS_FLAG_GRP  *p_grp,
                      }
                  }
                                                                 /* Lock the scheduler/re-enable interrupts              */
-                 OS_CRITICAL_ENTER_CPU_EXIT();              
+                 OS_CRITICAL_ENTER_CPU_EXIT();
                  OS_FlagBlock(&pend_data,
                               p_grp,
                               flags,
@@ -547,7 +547,7 @@ OS_FLAGS  OSFlagPend (OS_FLAG_GRP  *p_grp,
                  CPU_CRITICAL_EXIT();                           /* Yes, condition met, return to caller                 */
 #if (defined(TRACE_CFG_EN) && (TRACE_CFG_EN == DEF_ENABLED))
                  TRACE_OS_FLAG_PEND(p_grp);                     /* Record the event.                                    */
-#endif                 
+#endif
                 *p_err = OS_ERR_NONE;
                  return (flags_rdy);
              } else {                                           /* Block task until events occur or timeout             */
@@ -562,7 +562,7 @@ OS_FLAGS  OSFlagPend (OS_FLAG_GRP  *p_grp,
                          return (0);
                      }
                  }
-                                                            
+
                  OS_CRITICAL_ENTER_CPU_EXIT();                  /* Lock the scheduler/re-enable interrupts              */
                  OS_FlagBlock(&pend_data,
                               p_grp,
@@ -603,9 +603,9 @@ OS_FLAGS  OSFlagPend (OS_FLAG_GRP  *p_grp,
                          return (0u);
                      }
                  }
-                                                            
+
                  OS_CRITICAL_ENTER_CPU_EXIT();                  /* Lock the scheduler/re-enable interrupts              */
-                 OS_FlagBlock(&pend_data,              
+                 OS_FlagBlock(&pend_data,
                               p_grp,
                               flags,
                               opt,
@@ -1036,7 +1036,7 @@ OS_FLAGS  OSFlagPost (OS_FLAG_GRP  *p_grp,
 
 #if (defined(TRACE_CFG_EN) && (TRACE_CFG_EN == DEF_ENABLED))
     TRACE_OS_FLAG_POST(p_grp);                                  /* Record the event.                                    */
-#endif    
+#endif
 
     return (flags_cur);
 }

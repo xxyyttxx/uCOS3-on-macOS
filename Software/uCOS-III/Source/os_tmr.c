@@ -14,11 +14,11 @@
 *
 * LICENSING TERMS:
 * ---------------
-*           uC/OS-III is provided in source form for FREE short-term evaluation, for educational use or 
+*           uC/OS-III is provided in source form for FREE short-term evaluation, for educational use or
 *           for peaceful research.  If you plan or intend to use uC/OS-III in a commercial application/
-*           product then, you need to contact Micrium to properly license uC/OS-III for its use in your 
-*           application/product.   We provide ALL the source code for your convenience and to help you 
-*           experience uC/OS-III.  The fact that the source is provided does NOT mean that you can use 
+*           product then, you need to contact Micrium to properly license uC/OS-III for its use in your
+*           application/product.   We provide ALL the source code for your convenience and to help you
+*           experience uC/OS-III.  The fact that the source is provided does NOT mean that you can use
 *           it commercially without paying a licensing fee.
 *
 *           Knowledge of the source code may NOT be used to develop a similar product.
@@ -304,7 +304,7 @@ CPU_BOOLEAN  OSTmrDel (OS_TMR  *p_tmr,
             *p_err   = OS_ERR_NONE;
              success = DEF_TRUE;
              break;
-             
+
         case OS_TMR_STATE_UNUSED:                               /* Already deleted                                      */
             *p_err   = OS_ERR_TMR_INACTIVE;
              success = DEF_FALSE;
@@ -580,9 +580,9 @@ void  OSTmrSet (OS_TMR               *p_tmr,
 * Returns    : DEF_TRUE      is the timer was started
 *              DEF_FALSE     if not or upon an error
 *
-* Note(s)    : 1) When starting/restarting a timer, regardless if it is in PERIODIC or ONE-SHOT mode, the timer is 
-*                 linked to the timer list with the OS_OPT_LINK_DLY option. This option sets the initial expiration 
-*                 time for the timer. For timers in PERIODIC mode, subsequent expiration times are handled by 
+* Note(s)    : 1) When starting/restarting a timer, regardless if it is in PERIODIC or ONE-SHOT mode, the timer is
+*                 linked to the timer list with the OS_OPT_LINK_DLY option. This option sets the initial expiration
+*                 time for the timer. For timers in PERIODIC mode, subsequent expiration times are handled by
 *                 the OS_TmrTask().
 ************************************************************************************************************************
 */
@@ -593,7 +593,7 @@ CPU_BOOLEAN  OSTmrStart (OS_TMR  *p_tmr,
     OS_TMR      *p_next;
     CPU_BOOLEAN  success;
 
-    
+
 
 #ifdef OS_SAFETY_CRITICAL
     if (p_err == DEF_NULL) {
@@ -1064,7 +1064,7 @@ void  OS_TmrInit (OS_ERR  *p_err)
 
 #if (OS_CFG_MUTEX_EN == DEF_ENABLED)
     OSMutexCreate(&OSTmrMutex,                                  /* Use a mutex to protect the timers                    */
-                  (CPU_CHAR *)"OS Tmr Mutex", 
+                  (CPU_CHAR *)"OS Tmr Mutex",
                   p_err);
     if (*p_err != OS_ERR_NONE) {
         return;
@@ -1236,8 +1236,8 @@ void  OS_TmrTask (void  *p_arg)
 ************************************************************************************************************************
 *                                          TIMER MANAGEMENT LOCKING MECHANISM
 *
-* Description: These functions are use to handle timer critical sections.  The preferred method is to use a mutex in 
-*              order to avoid locking the scheduler and also, to avoid calling callback functions while the scheduler is 
+* Description: These functions are use to handle timer critical sections.  The preferred method is to use a mutex in
+*              order to avoid locking the scheduler and also, to avoid calling callback functions while the scheduler is
 *              locked.
 *
 * Arguments  : none
