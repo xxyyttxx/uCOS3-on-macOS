@@ -381,6 +381,11 @@ CPU_STK  *OSTaskStkInit (OS_TASK_PTR    p_task,
                          CPU_STK_SIZE   stk_size,
                          OS_OPT         opt)
 {
+    (void)p_task;
+    (void)p_arg;
+    (void)p_stk_limit;
+    (void)stk_size;
+    (void)opt;
     return (p_stk_base);
 }
 

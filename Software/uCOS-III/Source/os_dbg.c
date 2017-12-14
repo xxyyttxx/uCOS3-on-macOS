@@ -57,7 +57,7 @@ CPU_INT32U  const  OSDbg_EndiannessTest        = 0x12345678LU;                 /
 CPU_INT08U  const  OSDbg_CalledFromISRChkEn    = OS_CFG_CALLED_FROM_ISR_CHK_EN;
 
 CPU_INT08U  const  OSDbg_FlagEn                = OS_CFG_FLAG_EN;
-OS_FLAG_GRP const  OSDbg_FlagGrp               = { 0u };
+OS_FLAG_GRP const  OSDbg_FlagGrp            /* = { 0u }*/;
 #if (OS_CFG_FLAG_EN == DEF_ENABLED)
 CPU_INT08U  const  OSDbg_FlagDelEn             = OS_CFG_FLAG_DEL_EN;
 CPU_INT08U  const  OSDbg_FlagModeClrEn         = OS_CFG_FLAG_MODE_CLR_EN;
@@ -80,7 +80,7 @@ CPU_INT16U  const  OSDbg_IntQ                  = 0u;
 
 CPU_INT08U  const  OSDbg_ISRPostDeferredEn     = OS_CFG_ISR_POST_DEFERRED_EN;
 
-OS_MEM      const  OSDbg_Mem                   = { 0u };
+OS_MEM      const  OSDbg_Mem                /* = { 0u }*/;
 CPU_INT08U  const  OSDbg_MemEn                 = OS_CFG_MEM_EN;
 #if OS_CFG_MEM_EN > 0u
 CPU_INT16U  const  OSDbg_MemSize               = sizeof(OS_MEM);               /* Mem. Partition header size (bytes)  */
@@ -102,7 +102,7 @@ CPU_INT16U  const  OSDbg_MsgQSize              = 0u;
 #endif
 
 
-OS_MUTEX    const  OSDbg_Mutex                 = { 0u };
+OS_MUTEX    const  OSDbg_Mutex              /* = { 0u }*/;
 CPU_INT08U  const  OSDbg_MutexEn               = OS_CFG_MUTEX_EN;
 #if (OS_CFG_MUTEX_EN == DEF_ENABLED)
 CPU_INT08U  const  OSDbg_MutexDelEn            = OS_CFG_MUTEX_DEL_EN;
@@ -129,7 +129,7 @@ CPU_INT16U  const  OSDbg_PrioTblSize           = sizeof(OSPrioTbl);
 CPU_INT16U  const  OSDbg_PtrSize               = sizeof(void *);               /* Size in Bytes of a pointer          */
 
 
-OS_Q        const  OSDbg_Q                     = { 0u };
+OS_Q        const  OSDbg_Q                  /* = { 0u } */;
 CPU_INT08U  const  OSDbg_QEn                   = OS_CFG_Q_EN;
 #if (OS_CFG_Q_EN == DEF_ENABLED)
 CPU_INT08U  const  OSDbg_QDelEn                = OS_CFG_Q_DEL_EN;
@@ -147,7 +147,7 @@ CPU_INT16U  const  OSDbg_QSize                 = 0u;
 CPU_INT08U  const  OSDbg_SchedRoundRobinEn     = OS_CFG_SCHED_ROUND_ROBIN_EN;
 
 
-OS_SEM      const  OSDbg_Sem                   = { 0u };
+OS_SEM      const  OSDbg_Sem                /* = { 0u } */;
 CPU_INT08U  const  OSDbg_SemEn                 = OS_CFG_SEM_EN;
 #if (OS_CFG_SEM_EN == DEF_ENABLED)
 CPU_INT08U  const  OSDbg_SemDelEn              = OS_CFG_SEM_DEL_EN;
@@ -194,7 +194,7 @@ CPU_INT16U  const  OSDbg_TLS_TblSize           = 0u;
 #endif
 
 
-OS_TMR      const  OSDbg_Tmr                   = { 0u };
+OS_TMR      const  OSDbg_Tmr                /* = { 0u } */;
 CPU_INT08U  const  OSDbg_TmrEn                 = OS_CFG_TMR_EN;
 #if (OS_CFG_TMR_EN == DEF_ENABLED)
 CPU_INT08U  const  OSDbg_TmrDelEn              = OS_CFG_TMR_DEL_EN;
@@ -530,8 +530,8 @@ void  OS_Dbg_Init (void)
 
     p_temp16 = (CPU_INT16U const *)&OSDbg_VersionNbr;
 
-    p_temp08 = p_temp08;                                     /* Prevent compiler warning for not using 'p_temp'        */
-    p_temp16 = p_temp16;
-    p_temp32 = p_temp32;
+    (void)p_temp08;                                     /* Prevent compiler warning for not using 'p_temp'        */
+    (void)p_temp16;
+    (void)p_temp32;
 }
 #endif
